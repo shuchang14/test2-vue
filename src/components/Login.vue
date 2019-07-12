@@ -118,6 +118,7 @@ export default {
     },
     methods:{
         login(){
+            sessionStorage.setItem("userCode",this.userInfo.userCode);
             this.$router.push({path:'/adminHome'});
         },
         register(){

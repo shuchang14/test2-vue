@@ -16,7 +16,7 @@
 							<el-dropdown>
 								<span class="el-dropdown-link">
 									<img src="../assets/logo.png" style="height: 40px;margin-top: 10px;margin-right: 10px;">
-									<span class="user-span-text">admin</span>
+									<span class="user-span-text">{{userInfo.userCode}}</span>
 								</span>
 								<el-dropdown-menu slot="dropdown">
 									<el-dropdown-item icon="el-icon-user">个人中心</el-dropdown-item>
@@ -40,7 +40,7 @@
 				      active-text-color="#ffd04b">
 					  <!-- el-icon-star-off   el-icon-tickets-->
 					    <template v-for="item in menuList">
-							<el-submenu :key="item.menuUuid" :index="item.menuUuid" class="menuitem">
+							<el-submenu :key="item.menuUuid" :index="item.menuUuid" class="menuitem" v-if="item.subMenuList.length>0">
 								<template slot="title">
 								<i v-if="item.iconUrl !=null && item.iconUrl !=''" :class="item.iconUrl"></i>
 								<i v-else class="el-icon-star-off"></i>
@@ -91,9 +91,9 @@
 		data(){
 			return{
 				menuList:[{
-					menuUuid:'系统管理',
-					menuCode:'',
-					menuName:'1001',
+					menuUuid:'1001',
+					menuCode:'G1001',
+					menuName:'系统管理',
 					url:'',
 					subMenuList:[{
 						menuUuid:'10012',
@@ -119,7 +119,13 @@
 					menuCode:'',
 					menuName:'菜单组02',
 					url:'',
-					subMenuList:[]
+					subMenuList:[{
+						menuUuid:'100177',
+						menuCode:'MEs04',
+						menuName:'噶看安定',
+						url:'/user',
+						subMenuList:[]
+					}]
 				},{
 					menuUuid:'1003',
 					menuCode:'',
@@ -150,7 +156,11 @@
 					overflow:'auto'
 				},
 				menuTool:false,
-				keyChange:''
+				keyChange:'',
+				userInfo:{
+					userCode:null,
+					password:null
+				}
 			}
 		},
 		methods:{
@@ -252,6 +262,8 @@
 			}
 		}, 
 		created:function(){//用于数据初始化
+		   this.userInfo.userCode=sessionStorage.getItem("userCode");
+		   console.log(this.userInfo);
 		   //加载菜单
 			// http.Get("base/menu/getMenuList",{"userCode":""}).then((result) => {
 			// 		this.menuList=result;
