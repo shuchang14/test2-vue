@@ -1,6 +1,6 @@
 # test2-vue
 
-> A Vue.js project
+> 基于Vue后台管理模板
 
 ## Build Setup
 
